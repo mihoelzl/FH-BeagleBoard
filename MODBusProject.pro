@@ -8,7 +8,11 @@ QT       += core gui dbus declarative
 
 TARGET = MODBusProject
 TEMPLATE = app
-
+unix {
+	BINDIR = $$PREFIX/bin
+	INSTALLS += target
+	target.path = $$BINDIR
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
