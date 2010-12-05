@@ -4,25 +4,17 @@
 #include <QtDeclarative/QDeclarativeView>
 #include <QtDeclarative/QDeclarativeContext>
 
+/**
+ * Creates declarativeview which displays qml ui. moreover it's passing the gsm wrapper to the ui.
+ */
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QDeclarativeView view;
-    view.setSource(QUrl::fromLocalFile("qml/start.qml"));
+    view.setSource(QUrl("qrc:/qml/start.qml"));
     view.setSceneRect(0,0,240,320);
     view.show();
     view.rootContext()->setContextProperty("OfonoContext", new GSM());
-
-    /*QApplication a(argc, argv);
-
-    MainWindow w;
-    w.show();
-
-    GSM gsm;
-    gsm.SetPowerOn();
-    gsm.outgoingCall("555000");*/
-
-
 
     return a.exec();
 }

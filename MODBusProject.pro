@@ -53,3 +53,6 @@ OTHER_FILES += \
     qml/images/Calendar_58.png \
     qml/images/button_grey.png \
     qml/images/Browser_58.png
+
+RESOURCES += \
+    resources.qrc

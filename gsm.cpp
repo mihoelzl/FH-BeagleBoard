@@ -5,8 +5,6 @@ GSM::GSM()
     m_OfonoModem = new OrgOfonoModemInterface("org.ofono", "/phonesim0", QDBusConnection::systemBus());
     m_VoiceCallManager = new OrgOfonoVoiceCallManagerInterface("org.ofono", "/phonesim0", QDBusConnection::systemBus());
     connect(m_VoiceCallManager, SIGNAL(PropertyChanged(const QString, const QDBusVariant)), this, SLOT(PropertyChanged(const QString, const QDBusVariant)));
-
-    m_dial = false;
 }
 
 GSM::~GSM()
@@ -14,28 +12,6 @@ GSM::~GSM()
     delete(m_OfonoModem);
     delete(m_VoiceCallManager);
 }
-
-
-void GSM::outgoingCall(QString number)
-{
-    m_dial = true;
-    qDebug("outgoingCall");
-    QDBusPendingReply<QDBusObjectPath> pendingReplys = m_VoiceCallManager->Dial(number, "default");
-    QDBusObjectPath dop = pendingReplys.value();
-    m_myCurOutgoingCall.clear();
-    m_myCurOutgoingCall.append(dop.path());
-    /*if(pendingReplys.isFinished() == true)
-    {
-        currentCalls = pendingReplys;
-
-        emit outgoingCallReceived(true);
-    }
-    else
-    {
-        emit outgoingCallReceived(false);
-    }*/
-}
-
 
 // ---------------------------------------------------------------------------------------------------- //
 // ------------------------------ OFONO MODEM ----------------------------------------------------------//
@@ -53,22 +29,18 @@ void GSM::SetPowerOff()
     m_OfonoModem->SetProperty("Powered", QDBusVariant(false));
 }
 
-
 // ---------------------------------------------------------------------------------------------------- //
-// ------------------------------ OFONO VOICECALLS -----------------------------------------------------//
+// ------------------------------ OFONO VOICECALL MANAGER ----------------------------------------------//
 // ---------------------------------------------------------------------------------------------------- //
 
-void GSM::Dial(QString &number)
+void GSM::outgoingCall(QString number)
 {
-    QDBusPendingReply<QDBusObjectPath> pedingReplys = m_VoiceCallManager->Dial(number, "default");
+    qDebug("outgoingCall");
+    QDBusPendingReply<QDBusObjectPath> pendingReplys = m_VoiceCallManager->Dial(number, "default");
+    QDBusObjectPath dop = pendingReplys.value();
+    m_myCurOutgoingCall.clear();
+    m_myCurOutgoingCall.append(dop.path());
 }
-
-
-void GSM::ReleaseAndAnswer()
-{
-    m_VoiceCallManager->ReleaseAndAnswer();
-}
-
 
 void GSM::HangUpAll()
 {
@@ -76,6 +48,10 @@ void GSM::HangUpAll()
     m_myCurOutgoingCall = "";
     m_VoiceCallManager->HangupAll();
 }
+
+// ---------------------------------------------------------------------------------------------------- //
+// ------------------------------ OFONO VOICECALL -----------------------------------------------------//
+// ---------------------------------------------------------------------------------------------------- //
 
 void GSM::answerCall()
 {

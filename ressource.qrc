@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>qml/Button.qml</file>
+        <file>qml/contacts.qml</file>
+        <file>qml/DialerButton.qml</file>
+        <file>qml/DialerForm.qml</file>
+        <file>qml/Display.qml</file>
+        <file>qml/JavaScript.js</file>
+        <file>qml/mcm440-phone-app-qml.qmlproject</file>
+        <file>qml/mcm440-phone-app-qml.qmlproject.user</file>
+        <file>qml/mcm440-phone-app-qml.qmlproject.user.2.1pre1</file>
+        <file>qml/MediaButton.qml</file>
+        <file>qml/start.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>qml/images/Browser_58.png</file>
+        <file>qml/images/button_grey.png</file>
+        <file>qml/images/Calendar_58.png</file>
+        <file>qml/images/Chat_58.png</file>
+        <file>qml/images/Clock_58.png</file>
+        <file>qml/images/display.png</file>
+        <file>qml/images/Maps_58.png</file>
+        <file>qml/images/mediabutton.png</file>
+        <file>qml/images/mediabutton-pressed.png</file>
+        <file>qml/images/Notes_58.png</file>
+        <file>qml/images/Phone_58.png</file>
+        <file>qml/images/Settings_58.png</file>
+        <file>qml/images/Weather_58.png</file>
+    </qresource>
+</RCC>
